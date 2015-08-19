@@ -3,8 +3,14 @@
 worker_processes 3 # amount of unicorn workers to spin up
 timeout 30         # restarts workers that hang for 30 seconds
 preload_app true
-listen ENV['PORT'] || 8080
-pid ENV['UNICORN_PID'] if ENV['UNICORN_PID']
+
+root_path = File.expand_path('../', File.dirname(__FILE__))
+
+working_directory "#{root_path}"
+pid "#{root_path}/tmp/pids/unicorn.pid"
+stderr_path "#{root_path}/log/unicorn.log"
+stdout_path "#{root_path}/log/unicorn.log"
+listen "#{root_path}/tmp/sockets/unicorn.sock"
 
 # Taken from github: https://github.com/blog/517-unicorn
 # Though everyone uses pretty miuch the same code

@@ -22,7 +22,6 @@ set :ssh_options, forward_agent: true
 
 set :linked_files, fetch(:linked_files, []) + %w(
   .env
-  config/newrelic.yml
   config/unicorn.rb
 )
 
@@ -45,6 +44,14 @@ namespace :errbit do
       execute "mkdir -p #{shared_path}/config"
       execute "mkdir -p #{shared_path}/tmp/pids"
       execute "touch #{shared_path}/.env"
+
+      {
+        'config/unicorn.default.rb' => 'config/unicorn.rb',
+      }.each do |src, target|
+        unless test("[ -f #{shared_path}/#{target} ]")
+          upload! src, "#{shared_path}/#{target}"
+        end
+      end
     end
   end
 end

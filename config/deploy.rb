@@ -7,12 +7,14 @@
 # to ./docs/deployment/capistrano.md for more info
 
 # config valid only for current version of Capistrano
+require 'capistrano/rbenv'
+
 lock '3.4.0'
 
 set :application, 'errbit'
-set :repo_url, 'https://github.com/errbit/errbit.git'
+set :repo_url, 'https://github.com/sinrutina/errbit'
 set :branch, ENV['branch'] || 'master'
-set :deploy_to, '/var/www/apps/errbit'
+set :deploy_to, '/home/ubuntu/apps/errbit'
 set :keep_releases, 5
 
 set :pty, true
@@ -31,10 +33,9 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
 )
 
 # check out capistrano-rbenv documentation
-# set :rbenv_type, :system
-# set :rbenv_path, '/usr/local/rbenv'
-# set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
-# set :rbenv_roles, :all
+set :rbenv_type, :user
+set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
+set :rbenv_roles, :all
 
 namespace :errbit do
   desc "Setup config files (first time setup)"

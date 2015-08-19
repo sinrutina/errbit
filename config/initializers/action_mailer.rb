@@ -3,11 +3,12 @@ if Errbit::Config.email_delivery_method == :smtp
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => Errbit::Config.smtp_address,
-    :port           => Errbit::Config.smtp_port,
-    :authentication => Errbit::Config.smtp_authentication,
+    :port           => 587,
+    :authentication => :login,
     :user_name      => Errbit::Config.smtp_user_name,
     :password       => Errbit::Config.smtp_password,
     :domain         => Errbit::Config.smtp_domain,
+    :enable_starttls_auto => true
   }
 end
 

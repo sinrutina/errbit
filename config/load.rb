@@ -38,14 +38,10 @@ Errbit::Config = Configurator.run({
   github_org_id:             ['GITHUB_ORG_ID'],
   github_access_scope:       ['GITHUB_ACCESS_SCOPE'],
 
-  email_delivery_method:     ['EMAIL_DELIVERY_METHOD', -> (values) {
-    values[:email_delivery_method] && values[:email_delivery_method].to_sym
-  }],
+  email_delivery_method:     :smtp,
 
   # smtp settings
   smtp_address:              ['SMTP_SERVER'],
-  smtp_port:                 ['SMTP_PORT'],
-  smtp_authentication:       ['SMTP_AUTHENTICATION'],
   smtp_user_name:            ['SMTP_USERNAME', 'SENDGRID_USERNAME'],
   smtp_password:             ['SMTP_PASSWORD', 'SENDGRID_PASSWORD'],
   smtp_domain:               ['SMTP_DOMAIN', 'SENDGRID_DOMAIN', ->(values) {

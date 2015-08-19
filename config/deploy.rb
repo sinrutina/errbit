@@ -35,6 +35,7 @@ set :linked_dirs, fetch(:linked_dirs, []) + %w(
 # check out capistrano-rbenv documentation
 set :rbenv_type, :user
 set :rbenv_ruby, File.read(File.expand_path('../../.ruby-version', __FILE__)).strip
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
 namespace :errbit do
